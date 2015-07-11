@@ -32,13 +32,10 @@ const HtmlComponent = React.createClass({
       <html>
 
       <head>
-        <title>.:. snowblind :.:</title>
+        <title>Reflow Example</title>
       </head>
 
       <body>
-      <div>
-        <h1>Welcome to snowblind</h1>
-      </div>
 
       <div id="container" dangerouslySetInnerHTML={{__html: markup}}></div>
 

@@ -1,6 +1,6 @@
-# Snowblind
+# React Examples
 
-An open source adventure game built with universal JavaScript, React + Redux
+Examples of React + Flux using Redux
 
 ## Build assets (necessary for first run)
 

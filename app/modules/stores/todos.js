@@ -3,7 +3,7 @@
 import { ADD } from '../constants/actionTypes.js';
 
 let initialState = {
-  items: [{ id: 'item1', text: 'List Item 1' }]
+  items: []
 };
 let nextId = 1;
 

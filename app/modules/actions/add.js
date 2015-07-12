@@ -2,8 +2,9 @@
 
 import { ADD } from '../constants/actionTypes.js';
 
-export function add() {
+export function add(text) {
   return {
-    type: ADD
+    type: ADD,
+    text: text
   };
-};
+}

@@ -1,9 +1,9 @@
 import React from 'react';
 
 const TodoListItem = React.createClass({
-  render: () => {
+  render: function() {
     return (
-      <li>Item 1</li>
+      <li>{this.props.children}</li>
     );
   }
 });

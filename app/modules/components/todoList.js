@@ -4,15 +4,7 @@ import TodoListItem from './todoListItem.js';
 const TodoList = React.createClass({
   getInitialState: function() {
     return {
-      listItems: [
-        {
-          id: 'item1',
-          text: 'List Item 1'
-        },
-        {
-          id: 'item2',
-          text: 'List Item 2'
-      }]
+      listItems: []
     };
   },
   render: function() {

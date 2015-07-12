@@ -1,8 +1,8 @@
 import React from 'react';
 import { createRedux } from 'redux';
 import { Provider } from 'redux/react';
-import TodoListContainer from './../app/modules/todoListContainer.js';
-import AppStore from './../app/modules/appStore';
+import TodoListContainer from './../app/modules/components/todoListContainer.js';
+import AppStore from './../app/modules/stores/appStore';
 
 const initialState = window.__data;
 const redux = createRedux({ appStore: AppStore }, initialState);

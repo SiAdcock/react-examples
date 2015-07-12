@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { createRedux } from 'redux';
-import AppStore from '../app/modules/appStore';
+import AppStore from '../app/modules/stores/appStore';
 import htmlComponent from '../app/modules/index';
-import TodoListContainer from '../app/modules/todoListContainer.js';
+import TodoListContainer from '../app/modules/components/todoListContainer.js';
 
 const render = () => {
   const redux = createRedux({appStore: AppStore});

@@ -4,13 +4,13 @@ import React from 'react';
 import { createRedux } from 'redux';
 import AppStore from '../app/modules/appStore';
 import htmlComponent from '../app/modules/index';
-import MyFirstComponent from '../app/modules/myFirstComponent.js';
+import TodoListContainer from '../app/modules/todoListContainer.js';
 
 const render = () => {
   const redux = createRedux({appStore: AppStore});
   const props = {
     dehydratedState: redux.getState(),
-    markup: React.renderToString(React.createElement(MyFirstComponent))
+    markup: React.renderToString(React.createElement(TodoListContainer))
   };
   const html = React.renderToString(React.createElement(htmlComponent, props));
   return html;

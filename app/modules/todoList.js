@@ -1,15 +1,14 @@
 import React from 'react';
+import TodoListItem from './todoListItem.js';
 
-const MyComponent = React.createClass({
+const TodoList = React.createClass({
   render: () => {
     return (
       <ul>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
+        <TodoListItem/>
       </ul>
     );
   }
 });
 
-export default MyComponent;
+export default TodoList;

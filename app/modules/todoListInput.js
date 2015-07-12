@@ -1,14 +1,11 @@
 import React from 'react';
-import TodoList from './todoList';
-import TodoListInput from './todoListInput.js';
-
 
 const MyComponent = React.createClass({
   render: () => {
     return (
       <div>
-        <TodoList />
-        <TodoListInput />
+        <input type="text" placeholder="What to do?"/>
+        <button type="button">Add</button>
       </div>
     );
   }

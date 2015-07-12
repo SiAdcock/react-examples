@@ -2,7 +2,7 @@
 
 import { ADD } from '../constants/actionTypes.js';
 
-export function add(text) {
+export default function(text) {
   return {
     type: ADD,
     text: text

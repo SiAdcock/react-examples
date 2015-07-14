@@ -6,63 +6,116 @@ Please follow the [installation guide](https://github.com/SiCurious/react-exampl
 
 ## Overview
 
-Now that we have some components, let's start implementing the Flux architecture using Redux.
+In this step, we're going to have some fun and create some React components.
 
-## Server
+## Todo List Item
 
-In the server's render method, we'll create a Redux object. We'll pass this into Redux's `Provider` component, which wraps
-our Todo List Container. We also need to pass the state of the application, owned by Redux's dispatcher, as a prop to the
-HTMLComponent.
+First, we'll need a Todo List Item component.
 
-```javascript
-// server/render.js
-
-// ...
-
-import { createRedux } from 'redux';
-import { Provider } from 'redux/react';
-
-const render = () => {
-  const redux = createRedux({});
-  const markup = React.renderToString(
-    <Provider redux={redux}>
-      {()=><TodoListContainer/>}
-    </Provider>
-  );
-  const props = {
-    dehydratedState: redux.getState(),
-    markup: markup
-  };
-  const html = React.renderToString(React.createElement(htmlComponent, props));
-  return html;
-};
-// ...
+```
+$ cd app/modules/components
+$ touch todoListItem.js
 ```
 
-The empty object we pass to `createRedux` is a placeholder for a store that we'll add in a future step.
-
-## Client
-
-Similar to the server, we need to create a Redux object on the client, and wrap the Todo List Container in a `Provider` component.
-
 ```javascript
-// client/index.js
+// app/modules/components/todoListItem.js
 
-// ...
+'use strict';
 
-import { createRedux } from 'redux';
-import { Provider } from 'redux/react';
+import React from 'react';
 
-const initialState = window.__data;
-const redux = createRedux({}, initialState);
+const TodoListItem = React.createClass({
+  render: function() {
+    return (
+      <li>{this.props.children}</li>
+    );
+  }
+});
 
-React.render(
-  <Provider redux={redux}>
-    {()=><TodoListContainer />}
-  </Provider>,
-  document.getElementById('container')
-);
+export default TodoListItem;
 ```
 
-Additionally, we retrieve the initial state from the window global (we added it to the global in the HTMLComponent) 
-and pass it into the `createRedux` function.
+## Todo List
+
+The Todo List will compose Todo List Items:
+
+```
+$ touch todoList.js
+```
+
+```javascript
+// app/modules/components/todoList.js
+
+'use strict';
+
+import React from 'react';
+import TodoListItem from './todoListItem.js';
+
+const TodoList = React.createClass({
+  render: function() {
+    return (
+      <ul>
+        <TodoListItem key='item1'>Dummy Todo List Item</TodoListItem>
+      </ul>
+    );
+  }
+});
+
+export default TodoList;
+```
+
+## Todo List Input
+
+We need a way of input new todo items
+
+```
+$ touch todoListInput.js
+```
+
+```javascript
+// app/modules/components/todoListInput.js
+
+'use strict';
+
+import React from 'react';
+
+const MyComponent = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <input type="text" placeholder="What to do?"/>
+        <button type="button">Add</button>
+      </div>
+    );
+  }
+});
+
+export default MyComponent;
+```
+
+## Todo List Container
+
+Let's have the Todo List Container component build a Todo List component.
+
+```javascript
+// app/modules/components/todoListContainer.js
+
+'use strict';
+
+import React from 'react';
+import TodoList from './todoList';
+import TodoListInput from './todoListInput.js';
+
+const TodoListContainer = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <TodoList />
+        <TodoListInput />
+      </div>
+    );
+  }
+});
+
+export default TodoListContainer;
+```

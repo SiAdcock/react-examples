@@ -5,14 +5,9 @@ import TodoListItem from './todoListItem.js';
 
 const TodoList = React.createClass({
   render: function() {
-    const listItemHtml = this.props.todos.map((listItem) => {
-      return (
-        <TodoListItem key={listItem.id}>{listItem.text}</TodoListItem>
-      );
-    });
     return (
       <ul>
-        {listItemHtml}
+        <TodoListItem key='item1'>Dummy Todo List Item</TodoListItem>
       </ul>
     );
   }

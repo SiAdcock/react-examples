@@ -3,12 +3,11 @@
 import React from 'react';
 import { createRedux } from 'redux';
 import { Provider } from 'redux/react';
-import TodoStore from '../app/modules/stores/todos';
 import htmlComponent from '../app/modules/index';
 import TodoListContainer from '../app/modules/components/todoListContainer';
 
 const render = () => {
-  const redux = createRedux({todos: TodoStore});
+  const redux = createRedux({});
   const markup = React.renderToString(
     <Provider redux={redux}>
       {()=><TodoListContainer/>}

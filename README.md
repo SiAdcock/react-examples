@@ -6,151 +6,133 @@ Please follow the [installation guide](https://github.com/SiCurious/react-exampl
 
 ## Overview
 
-In the final example, we will create an action that adds an item to the Todo list.
+In this example, we will create a store that manages the state of the Todo List. Our Todo List component will be populated
+from the store.
 
-## Constants
+## Store
 
-Lets create a directory under `modules/` to hold application constants.
+Create a directory under `modules/` to hold stores.
 
 ```
 $ cd app/modules
-$ mkdir constants
+$ mkdir stores
+$ cd stores
+$ touch todos.js 
 ```
 
-Our first set of constants will be `actionTypes`. Every action has a type. Stores use it to determine how to transform 
-data.
-
-```
-$ cd constants
-$ touch actionTypes.js 
-```
-
-We'll just define the one action type for now:
+We'll define an initial state for our todo list. This will take the form of an object with a property called `items`, an
+array of todo list items.
 
 ```javascript
-
-// app/modules/constants/actionTypes.js
+// app/modules/stores/todos.js
 'use strict';
-
-export const ADD = 'ADD';
-```
-
-## Actions and action creators
-
-Our action creator will sit under an `actions/` directory under `modules/`:
-
-```
-$ cd ..
-$ mkdir actions
-$ touch add.js
-```
-
-In Redux, actions are created by calling action creator functions directly. When the action creator function is called, 
-the dispatcher passes the returned object (the action) to the stores. This all happens under the hood. 
-
-The action returned by the action creator should have an action type property, so the store will know what to do with
-it. We are also going to specify a text property, which will hold the text of the todo item.
-
-```javascript
-// app/modules/actions/add.js
-
-'use strict';
-
-import { ADD } from '../constants/actionTypes.js';
-
-export default function(text) {
-  return {
-    type: ADD,
-    text: text
-  };
-}
-```
-
-## Listening for the action in the store
-
-To listen for the action, we simply extend the switch statement in the store. We also need to import the action type 
-constants. We'll also track the ID of the todo item in a simplistic way.
-
-```javascript
-// app/modules/store/todos.js
-
-import { ADD } from '../constants/actionTypes.js';
 
 let initialState = {
-  items: []
+  items: [{
+    text: 'Dummy list item',
+    id: 'item1'
+  }]
 };
-let nextId = 1;
 
 export default (state, action) => {
   state = state || initialState;
   switch (action.type) {
-    case ADD:
-      return {
-        items: [{
-          id: 'item' + ++nextId,
-          text: action.text
-        }].concat(state.items)
-      };
     default:
       return state;
   }
-  
+};
+```
+
+The store is a function which expects a state and an action. It is called by the dispatcher when an action is created.
+The dispatcher owns the state of the application. The store provides a means of transforming that state. For now, we don't
+care what action occurs, we'll always return the current state without performing any transformation.
+
+## Registering the store
+
+The store needs to be registered with the dispatcher. We do this when we create the `redux` object on intial render.
+Remember, this application is pre-rendered on the server, but can also be rendered on the client.
+
+```javascript
+// server/render.js
+
+// ...
+
+import TodoStore from '../app/modules/stores/todos';
+
+const render = () => {
+  const redux = createRedux({todos: TodoStore});
+
+// client/index.js
+
+// ...
+import TodoStore from './../app/modules/stores/todos';
+
+const initialState = window.__data;
+const redux = createRedux({ todos: TodoStore }, initialState);
+
 // ...
 ```
 
-## Bind the action creator
+## Hook up the Todo List component
 
-We need to bind action creators to the dispatcher's dispatch method. We can do this in the todo list container's 
-`renderChild` method.
+We are going to pass the state of the todo list into the Todo List component as a prop, but first we must retrieve the 
+state using redux's Connector component. We'll do this in the Todo List Container component.
 
 ```javascript
 // app/modules/components/todoListContainer.js
 
-import add from '../actions/add';
-import { bindActionCreators } from 'redux';
+'use strict';
 
-// ...
+import React from 'react';
+import { Connector } from 'redux/react';
+import TodoList from './todoList';
+import TodoListInput from './todoListInput.js';
+
+const TodoListContainer = React.createClass({
+  render: function() {
+    return (
+      <Connector>
+        {this.renderChild}
+      </Connector>
+    );
+  },
 
   renderChild: function(state) {
-    const actions = bindActionCreators({add: add}, state.dispatch);
     return (
       <div>
         <TodoList todos={state.todos.items} />
-        <TodoListInput addTodo={actions.add} />
+        <TodoListInput />
       </div>
     );
   }
+});
 
-// ...
+export default TodoListContainer;
 ```
-
-Notice how we are passing the newly-bound `add` action creator as a `prop` down to the todo list input component.
-
-## Calling the action creator
-
-The action creator is now accessible in the todo list input component on `this.props`. We can easily call the action 
-creator, passing the text value of the todo input field.
+Finally, we'll map the contents of the Todo List's `this.props.todos` into a JSX list:
 
 ```javascript
-// app/modules/components/todoListInput.js
+// app/modules/components/todoList.js
 
-// ...
+'use strict';
 
-  handleAddTodo: function() {
-    var newTodo = this.refs.todoField.getDOMNode().value;
-    this.props.addTodo(newTodo);
-  },
+import React from 'react';
+import TodoListItem from './todoListItem.js';
+
+const TodoList = React.createClass({
   render: function() {
+    const listItemHtml = this.props.todos.map((listItem) => {
+      return (
+        <TodoListItem key={listItem.id}>{listItem.text}</TodoListItem>
+      );
+    });
     return (
-      <div>
-        <input type="text" ref="todoField" placeholder="What to do?"/>
-        <button type="button" onClick={this.handleAddTodo}>Add</button>
-      </div>
+      <ul>
+        {listItemHtml}
+      </ul>
     );
   }
+});
 
-// ...
+export default TodoList;
 ```
-
-Fire up the application and give it a test. Notice what happens when you complete the input feld and click the button.
-Can you think of any ways to improve the user experience?

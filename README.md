@@ -6,10 +6,9 @@ Please follow the [installation guide](https://github.com/SiCurious/react-exampl
 
 * Step 1: Root Component
 * Step 2: [Adding Components]()
-* Step 3:
-* Step 4:
-* Step 5: [Store]()
-* Step 6: [Action]()
+* Step 3: [Redux]()
+* Step 4: [Store]()
+* Step 5: [Action]()
 
 
 ## Overview

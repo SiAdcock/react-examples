@@ -15,7 +15,7 @@ Please follow the [installation guide](https://github.com/SiCurious/react-exampl
 Switch to the branch for this example:
 
 ```
-$ git checkout flux-todo/step-1
+$ git checkout flux-todo/step-2
 ```
 
 ## Overview

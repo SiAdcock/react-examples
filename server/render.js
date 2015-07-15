@@ -2,10 +2,9 @@
 
 import React from 'react';
 import htmlComponent from '../app/modules/index';
-import TodoListContainer from '../app/modules/components/todoListContainer';
 
 const render = () => {
-  const markup = React.renderToString(<TodoListContainer/>);
+  const markup = React.renderToString(<div>Hello</div>);
   const props = {
     dehydratedState: {},
     markup: markup

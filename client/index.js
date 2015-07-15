@@ -1,6 +1,7 @@
-import React from 'react';
-import TodoListContainer from './../app/modules/components/todoListContainer.js';
+'use strict';
 
-React.render(<TodoListContainer />,
+import React from 'react';
+
+React.render(<div>Hello</div>,
   document.getElementById('container')
 );

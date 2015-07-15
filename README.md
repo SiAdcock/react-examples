@@ -6,96 +6,51 @@ Please follow the [installation guide](https://github.com/SiCurious/react-exampl
 
 ## Overview
 
-In this step, we're going to have some fun and create some React components.
+Here we have a boilerplate project.
 
-## Todo List Item
+### `gulpfile.js` and `lib/tasks/`
 
-First, we'll need a Todo List Item component.
+For task automation using [Gulp](http://gulpjs.com/).
 
-```
-$ cd app/modules/components
-$ touch todoListItem.js
-```
+### `webpack.config.js` and `webpack.config.dev.js`
 
-```javascript
-// app/modules/components/todoListItem.js
+Production and development versions of our [Webpack](http://webpack.github.io/) configuration.
 
-'use strict';
+### `index.js`
 
-import React from 'react';
+An initialisation script, that kicks off the server. It also imports Babel for transpiling JSX, ES6 and any other
+supported syntax extensions we may need.
 
-const TodoListItem = React.createClass({
-  render: function() {
-    return (
-      <li>{this.props.children}</li>
-    );
-  }
-});
+### `server/index.js`
 
-export default TodoListItem;
-```
+Kicks off our server.
 
-## Todo List
+### `server/render.js`
 
-The Todo List will compose Todo List Items:
+Pre-renders our HTML. The resulting HTML is sent to the client by `server/index.js`
 
-```
-$ touch todoList.js
-```
+### `client/index.js`
 
-```javascript
-// app/modules/components/todoList.js
+Entry point into the application. Renders our components on the client.
 
-'use strict';
+### `app/modules/index.js`
 
-import React from 'react';
-import TodoListItem from './todoListItem.js';
-
-const TodoList = React.createClass({
-  render: function() {
-    return (
-      <ul>
-        <TodoListItem key='item1'>Dummy Todo List Item</TodoListItem>
-      </ul>
-    );
-  }
-});
-
-export default TodoList;
-```
-
-## Todo List Input
-
-We need a way of input new todo items
-
-```
-$ touch todoListInput.js
-```
-
-```javascript
-// app/modules/components/todoListInput.js
-
-'use strict';
-
-import React from 'react';
-
-const MyComponent = React.createClass({
-  render: function() {
-    return (
-      <div>
-        <input type="text" placeholder="What to do?"/>
-        <button type="button">Add</button>
-      </div>
-    );
-  }
-});
-
-export default MyComponent;
-```
+A top-level component, that defines the HTML page onto which our application will be added. Loads our dev scripts and
+static assets. Injects markup into the page and attached the state of the application passed down from the server to a
+global variable called `__data`. This will allow us to make further page updates on the client side, without needing to
+call the server.
 
 ## Todo List Container
 
-Let's have the Todo List Container component build a Todo List component.
+Currently our React application consists of an uninteresting `<div>` tag, which is built in `server/index.js` and 
+in `client/index.js`. Let's turn this into a React component.
+
+```
+$ cd app/modules
+$ mkdir components
+$ cd components
+$ touch todoListContainer.js
+```
 
 ```javascript
 // app/modules/components/todoListContainer.js
@@ -103,19 +58,45 @@ Let's have the Todo List Container component build a Todo List component.
 'use strict';
 
 import React from 'react';
-import TodoList from './todoList';
-import TodoListInput from './todoListInput.js';
 
 const TodoListContainer = React.createClass({
   render: function() {
     return (
       <div>
-        <TodoList />
-        <TodoListInput />
+        <ul>
+          <li>List Item 1</li>
+        </ul>
       </div>
     );
   }
 });
 
 export default TodoListContainer;
+```
+
+This will serve as the root component of our React application. Let's pre-render this component on the server:
+
+```javascript
+// server/render.js
+
+// ...
+
+import TodoListContainer from '../app/modules/components/todoListContainer';
+
+const render = () => {
+  const markup = React.renderToString(<TodoListContainer/>);
+
+// ...
+```
+
+And for re-rendering on the client:
+
+```javascript
+// client/index.js
+
+import TodoListContainer from './../app/modules/components/todoListContainer.js';
+
+React.render(<TodoListContainer />,
+  document.getElementById('container')
+);
 ```

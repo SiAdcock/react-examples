@@ -56,6 +56,7 @@ Our action creator will sit under an `actions/` directory under `modules/`:
 ```
 $ cd ..
 $ mkdir actions
+$ cd actions
 $ touch add.js
 ```
 
@@ -168,3 +169,5 @@ creator, passing the text value of the todo input field.
 
 Fire up the application and give it a test. Notice what happens when you complete the input feld and click the button.
 Can you think of any ways to improve the user experience?
+
+If you get stuck, have a peek at the [finished article](https://github.com/SiCurious/react-examples/tree/flux-todo/complete) in all its glory.

@@ -1,3 +1,5 @@
+'use strict';
+
 import React from 'react';
 import { createRedux } from 'redux';
 import { Provider } from 'redux/react';

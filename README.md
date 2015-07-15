@@ -1,46 +1,53 @@
-# Isomorphic Todo Example in React and Redux - Step 1: Root Component
+# Isomorphic Todo Example in React and Redux
+
+# Step 1: Root Component
 
 ## Installation and setup
 
 Please follow the [installation guide](https://github.com/SiCurious/react-examples/wiki/Installation-and-setup) if you haven't already.
 
-* Step 1: Root Component
-* Step 2: [Adding Components]()
-* Step 3: [Redux]()
-* Step 4: [Store]()
-* Step 5: [Action]()
+* [Step 1: Root Component](https://github.com/SiCurious/react-examples/tree/flux-todo/step-1)
+* [Step 2: Adding Components](https://github.com/SiCurious/react-examples/tree/flux-todo/step-2)
+* [Step 3: Redux](https://github.com/SiCurious/react-examples/tree/flux-todo/step-3)
+* [Step 4: Store](https://github.com/SiCurious/react-examples/tree/flux-todo/step-4)
+* [Step 5: Action](https://github.com/SiCurious/react-examples/tree/flux-todo/step-5)
 
+Switch to the branch for this example:
+
+```
+$ git checkout flux-todo/step-1
+```
 
 ## Overview
 
 Here we have a boilerplate project.
 
-### `gulpfile.js` and `lib/tasks/`
+#### `gulpfile.js` and `lib/tasks/`
 
 For task automation using [Gulp](http://gulpjs.com/).
 
-### `webpack.config.js` and `webpack.config.dev.js`
+#### `webpack.config.js` and `webpack.config.dev.js`
 
 Production and development versions of our [Webpack](http://webpack.github.io/) configuration.
 
-### `index.js`
+#### `index.js`
 
 An initialisation script, that kicks off the server. It also imports Babel for transpiling JSX, ES6 and any other
 supported syntax extensions we may need.
 
-### `server/index.js`
+#### `server/index.js`
 
 Kicks off our server.
 
-### `server/render.js`
+#### `server/render.js`
 
 Pre-renders our HTML. The resulting HTML is sent to the client by `server/index.js`
 
-### `client/index.js`
+#### `client/index.js`
 
 Entry point into the application. Renders our components on the client.
 
-### `app/modules/index.js`
+#### `app/modules/index.js`
 
 A top-level component, that defines the HTML page onto which our application will be added. Loads our dev scripts and
 static assets. Injects markup into the page and attached the state of the application passed down from the server to a
@@ -108,4 +115,4 @@ React.render(<TodoListContainer />,
 );
 ```
 
-Now we're ready for [step 2]().
+Now we're ready for [step 2](https://github.com/SiCurious/react-examples/tree/flux-todo/step-2).

@@ -1,8 +1,14 @@
-# Isomorphic Todo Example in Redux
+# Isomorphic Todo Example in React and Redux - Step 3: Redux
 
 ## Installation and setup
 
 Please follow the [installation guide](https://github.com/SiCurious/react-examples/wiki/Installation-and-setup) if you haven't already.
+
+* Step 1: [Root Component]()
+* Step 2: [Adding Components]()
+* Step 3: Redux
+* Step 4: [Store]()
+* Step 5: [Action]()
 
 ## Overview
 
@@ -66,3 +72,5 @@ React.render(
 
 Additionally, we retrieve the initial state from the window global (we added it to the global in the HTMLComponent) 
 and pass it into the `createRedux` function.
+
+Now let's create our store in [step 4]().

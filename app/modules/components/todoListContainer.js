@@ -1,7 +1,9 @@
 'use strict';
 
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import { Connector } from 'redux/react';
+import add from '../actions/add';
 import TodoList from './todoList';
 import TodoListInput from './todoListInput.js';
 
@@ -15,10 +17,11 @@ const TodoListContainer = React.createClass({
   },
 
   renderChild: function(state) {
+    const actions = bindActionCreators({add: add}, state.dispatch);
     return (
       <div>
         <TodoList todos={state.todos.items} />
-        <TodoListInput />
+        <TodoListInput addTodo={actions.add} />
       </div>
     );
   }

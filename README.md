@@ -6,7 +6,7 @@
 
 Please follow the [installation guide](https://github.com/SiCurious/react-examples/wiki/Installation-and-setup) if you haven't already.
 
-* [Step 1: Root Component](https://github.com/SiCurious/react-examples/tree/flux-todo/step-1)
+* Step 1: Root Component
 * [Step 2: Adding Components](https://github.com/SiCurious/react-examples/tree/flux-todo/step-2)
 * [Step 3: Redux](https://github.com/SiCurious/react-examples/tree/flux-todo/step-3)
 * [Step 4: Store](https://github.com/SiCurious/react-examples/tree/flux-todo/step-4)

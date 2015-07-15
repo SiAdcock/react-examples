@@ -1,8 +1,14 @@
-# Isomorphic Todo Example in Redux
+# Isomorphic Todo Example in React and Redux - Step 4: Store
 
 ## Installation and setup
 
 Please follow the [installation guide](https://github.com/SiCurious/react-examples/wiki/Installation-and-setup) if you haven't already.
+
+* Step 1: [Root Component]()
+* Step 2: [Adding Components]()
+* Step 3: [Redux]()
+* Step 4: Store
+* Step 5: [Action]()
 
 ## Overview
 
@@ -136,3 +142,5 @@ const TodoList = React.createClass({
 
 export default TodoList;
 ```
+
+Now for the finale, on to [step 5]().

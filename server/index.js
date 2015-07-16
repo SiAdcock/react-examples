@@ -1,6 +1,7 @@
 'use strict';
 
 import Express from 'express';
+import bodyParser from 'body-parser';
 import path from 'path';
 import api from './api';
 import render from './render';
@@ -10,6 +11,10 @@ import TodoStore from './../app/modules/stores/todos';
 
 const app = new Express();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use('/build', Express.static(path.join(process.cwd(), 'build')));
 app.use('/api', api(router));
 app.use((req, res) => {

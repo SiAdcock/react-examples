@@ -11,6 +11,7 @@ export default (state, action) => {
   state = state || initialState;
   switch (action.type) {
     case ADD:
+      action.promise.then(res => console.log(res));
       return {
         items: [{
           id: 'item' + ++nextId,

@@ -2,14 +2,16 @@
 
 import Express from 'express';
 import bodyParser from 'body-parser';
+import Router from 'routr';
 import path from 'path';
 import api from './api';
 import render from './render';
-import router from './router';
+import routes from './routes';
 import create from './../app/modules/redux';
 import TodoStore from './../app/modules/stores/todos';
 
 const app = new Express();
+let router = new Router(routes);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

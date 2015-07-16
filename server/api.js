@@ -7,7 +7,7 @@ const api = (router) => {
   return (req, res) => {
     const route = router.getRoute(req.url, {method: req.method});
 
-    if (route) {
+    if (route.url === '/add') {
       state.items.push({text: req.body.text});
       res.send(JSON.stringify(state));
     }

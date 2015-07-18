@@ -8,7 +8,7 @@ import api from './api';
 import render from './render';
 import routes from './routes';
 import create from './../app/modules/redux';
-import TodoStore from './../app/modules/stores/todos';
+import * as reducers from '../app/modules/reducers/index';
 
 const app = new Express();
 let router = new Router(routes);
@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({
 app.use('/build', Express.static(path.join(process.cwd(), 'build')));
 app.use('/api', api(router));
 app.use((req, res) => {
-  const store = create({todos: TodoStore});
+  const store = create(reducers);
   const html = render(store);
   res.send(html);
 });

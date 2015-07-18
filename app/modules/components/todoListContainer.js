@@ -2,31 +2,25 @@
 
 import React from 'react';
 import { bindActionCreators } from 'redux';
-import { Connector } from 'redux/react';
+import { connect } from 'react-redux';
 import add from '../actions/add';
 import TodoList from './todoList';
 import TodoListInput from './todoListInput';
 
-const TodoListContainer = React.createClass({
-  render: function() {
-    return (
-      <Connector>
-        {this.renderChild}
-      </Connector>
-    );
-  },
-
-  renderChild: function(state) {
-    const actions = bindActionCreators({add: add}, state.dispatch);
-    console.log(state.todos);
-
+@connect(state => ({
+  todos: state.todos
+}))
+class TodoListContainer {
+  render() {
+    const { dispatch, todos } = this.props;
+    const actions = bindActionCreators({add: add}, dispatch);
     return (
       <div>
-        <TodoList todos={state.todos.items} />
+        <TodoList todos={todos} />
         <TodoListInput addTodo={actions.add} />
       </div>
     );
   }
-});
+};
 
 export default TodoListContainer;

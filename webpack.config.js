@@ -15,7 +15,7 @@ const config = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel?optional=runtime'
+        loader: 'babel?stage=1&optional=runtime'
       }
     ]
   },

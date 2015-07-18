@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Connector } from 'redux/react';
 import add from '../actions/add';
 import TodoList from './todoList';
-import TodoListInput from './todoListInput.js';
+import TodoListInput from './todoListInput';
 
 const TodoListContainer = React.createClass({
   render: function() {

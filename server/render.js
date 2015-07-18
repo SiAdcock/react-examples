@@ -5,14 +5,14 @@ import { Provider } from 'redux/react';
 import htmlComponent from '../app/modules/index';
 import TodoListContainer from '../app/modules/components/todoListContainer';
 
-const render = (redux) => {
+const render = (store) => {
   const markup = React.renderToString(
-    <Provider redux={redux}>
+    <Provider store={store}>
       {()=><TodoListContainer/>}
     </Provider>
   );
   const props = {
-    dehydratedState: redux.getState(),
+    dehydratedState: store.getState(),
     markup: markup
   };
   const html = React.renderToString(React.createElement(htmlComponent, props));

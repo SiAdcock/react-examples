@@ -1,10 +1,10 @@
 
-import { createRedux, createDispatcher, composeStores } from 'redux';
+import { createStore, composeReducers } from 'redux';
+import promiseMiddleware from 'redux-promise';
 
 const create = (stores, initialState) => {
-  const store = composeStores(stores);
-  const dispatcher = createDispatcher(store);
-  return createRedux(dispatcher, initialState);
+  const reducer = composeReducers(stores);
+  return createStore(reducer, initialState, [promiseMiddleware]);
 };
 
 export default create;

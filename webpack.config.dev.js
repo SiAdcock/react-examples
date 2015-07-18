@@ -22,7 +22,7 @@ const config = {
     loaders: [
       {
         test: /\.js$/,
-        loaders: ['react-hot', 'babel?optional=runtime'],
+        loaders: ['react-hot', 'babel?stage=1&optional=runtime'],
         exclude: /node_modules/
       }
     ]

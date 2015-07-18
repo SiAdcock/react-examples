@@ -18,6 +18,8 @@ const TodoListContainer = React.createClass({
 
   renderChild: function(state) {
     const actions = bindActionCreators({add: add}, state.dispatch);
+    console.log(state.todos);
+
     return (
       <div>
         <TodoList todos={state.todos.items} />

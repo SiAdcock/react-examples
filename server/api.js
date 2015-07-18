@@ -1,7 +1,9 @@
 'use strict';
 
 let state = {
-  items: []
+  items: [{
+    text: 'Default Item'
+  }]
 };
 const api = (router) => {
   return (req, res) => {

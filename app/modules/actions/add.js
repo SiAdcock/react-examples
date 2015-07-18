@@ -1,11 +1,12 @@
 'use strict';
 
 import fetch from 'isomorphic-fetch';
+import { createAction } from 'redux-actions';
 import { ADD } from '../constants/actionTypes.js';
 
-export default function(text) {
+const action = createAction(ADD, async text => {
 
-  var promise = fetch('/api/add', {
+  const result = await fetch('/api/add', {
     method: 'post',
     headers: {
       'Accept': 'application/json',
@@ -14,11 +15,9 @@ export default function(text) {
     body: JSON.stringify({
       text: text
     })
-  });
-  
-  return {
-    type: ADD,
-    text: text,
-    promise: promise
-  };
-}
+  }).then((res) => res.json()).then((json) => json);
+
+  return result.items;
+});
+
+export default action;

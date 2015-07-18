@@ -20,8 +20,8 @@ app.use(bodyParser.urlencoded({
 app.use('/build', Express.static(path.join(process.cwd(), 'build')));
 app.use('/api', api(router));
 app.use((req, res) => {
-  const redux = create({todos: TodoStore});
-  const html = render(redux);
+  const store = create({todos: TodoStore});
+  const html = render(store);
   res.send(html);
 });
 app.listen(8080, (err) => {

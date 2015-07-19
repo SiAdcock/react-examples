@@ -3,7 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { add } from '../actions/index';
+import * as actionCreators from '../actions/index';
 import TodoList from './todoList';
 import TodoListInput from './todoListInput';
 
@@ -13,7 +13,7 @@ import TodoListInput from './todoListInput';
 class TodoListContainer {
   render() {
     const { dispatch, todos } = this.props;
-    const actions = bindActionCreators({ add: add }, dispatch)
+    const actions = bindActionCreators(actionCreators, dispatch)
     return (
       <div>
         <TodoList todos={todos} />

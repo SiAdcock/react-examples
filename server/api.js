@@ -1,5 +1,10 @@
 'use strict';
 
+import koa from 'koa';
+import bodyparser from 'koa-bodyparser';
+import route from 'koa-route';
+import compose from 'koa-compose';
+
 let nextId = 1000;
 let state = {
   items: [{
@@ -7,27 +12,22 @@ let state = {
     text: 'Default Item'
   }]
 };
-const api = (router) => {
-  return (req, res) => {
+const app = koa();
 
-    const route = router.getRoute(req.url, {method: req.method});
-    let item;
-
-    if (route.url === '/') {
-      res.send(JSON.stringify(state));
-    }
-    else if (route.url === '/add') {
-      item = {
-        text: req.body.text,
-        id: ++nextId
-      };
-      state.items.push(item);
-      res.send(JSON.stringify(item));
-    }
-    else {
-      res.send(404, '[Route not found]');
-    }
+app.use(bodyparser());
+app.use(route.get('/api/'), function* () {
+  this.body = JSON.stringify(state);
+});
+app.use(route.post('/add'), function* (req) {
+  let item = {
+    text: req.body.text,
+    id: ++nextId
   };
-};
 
-export default api;
+  state.items.push(item);
+  this.body = JSON.stringify(item);
+});
+
+export default function() {
+  return compose(app.middleware);
+};

@@ -1,39 +1,27 @@
 'use strict';
 
-import Express from 'express';
-import bodyParser from 'body-parser';
-import Router from 'routr';
-import path from 'path';
+import koa from 'koa';
+import serve from 'koa-static';
 import log from '../lib/logging/index';
 import api from './api';
 import render from './render';
-import routes from './routes';
 import create from './../app/modules/redux';
 import * as reducers from '../app/modules/reducers/index';
-import { get } from './../app/modules/actions/index';
+import { get } from './../app/modules/actions/index'
 
-const app = new Express();
-let router = new Router(routes);
+let app = koa();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.use('/build', Express.static(path.join(process.cwd(), 'build')));
-app.use('/api', api(router));
-app.use((req, res) => {
+app.use(serve('build'));
+app.use(api());
+app.use(function *() {
   const store = create(reducers);
-  store.dispatch(get());
+  console.log('1.');
+  //yield store.dispatch(get());
   const html = render(store);
-  res.send(html);
+  console.log('4.');
+  this.body = html;
 });
-app.listen(8080, (err) => {
-  if (err) {
-    console.err(err);
-  }
-  else {
-    log.info('Web server listening on port 8080');
-  }
-});
+app.listen(8080);
+log.info('Web server listening on port 8080');
 
 export default app;

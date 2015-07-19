@@ -5,6 +5,7 @@ import { createAction } from 'redux-actions';
 import { GET } from '../constants/actionTypes.js';
 
 const action = createAction(GET, async () => {
+  console.log('2.');
   const result = await fetch('/api/', {
     method: 'get',
     headers: {
@@ -13,6 +14,7 @@ const action = createAction(GET, async () => {
     }
   }).then((res) => res.json());
 
+  console.log('3.');
   return result;
 });
 

@@ -4,6 +4,7 @@ import Express from 'express';
 import bodyParser from 'body-parser';
 import Router from 'routr';
 import path from 'path';
+import log from '../lib/logging/index';
 import api from './api';
 import render from './render';
 import routes from './routes';
@@ -31,7 +32,7 @@ app.listen(8080, (err) => {
     console.err(err);
   }
   else {
-    console.log('web server listening on port 8080');
+    log.info('Web server listening on port 8080');
   }
 });
 

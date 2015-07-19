@@ -1,12 +1,11 @@
 'use strict';
 
 import React from 'react';
-import add from '../actions/add';
 
 const MyComponent = React.createClass({
   handleAddTodo: function() {
     var newTodo = this.refs.todoField.getDOMNode().value;
-    this.props.dispatch(add(newTodo));
+    this.props.add(newTodo);
   },
   render: function() {
     return (

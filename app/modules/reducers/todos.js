@@ -8,7 +8,7 @@ let todosMap = {};
 let initialState = [];
 
 addReducer = (state = initialState, action) => {
-  return state.concat(action.text);
+  return state.concat(action.payload);
 };
 todosMap[ADD] = addReducer;
 

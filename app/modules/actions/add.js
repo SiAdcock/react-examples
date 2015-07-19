@@ -5,7 +5,6 @@ import { createAction } from 'redux-actions';
 import { ADD } from '../constants/actionTypes.js';
 
 const action = createAction(ADD, async text => {
-
   const result = await fetch('/api/add', {
     method: 'post',
     headers: {
@@ -17,7 +16,7 @@ const action = createAction(ADD, async text => {
     })
   }).then((res) => res.json()).then((json) => json);
 
-  return result.items;
+  return result;
 });
 
 export default action;

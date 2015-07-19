@@ -1,9 +1,10 @@
+'use strict';
 
-import { createStore, composeReducers } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import promiseMiddleware from 'redux-promise';
 
 const create = (reducers, initialState) => {
-  const reducer = composeReducers(reducers);
+  const reducer = combineReducers(reducers);
   return createStore(reducer, initialState, [promiseMiddleware]);
 };
 

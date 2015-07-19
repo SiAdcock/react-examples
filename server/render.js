@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import { Provider } from 'redux/react';
+import { Provider } from 'react-redux';
 import htmlComponent from '../app/modules/index';
 import TodoListContainer from '../app/modules/components/todoListContainer';
 

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import create from '../app/modules/redux';
-import { Provider } from 'redux/react';
+import { Provider } from 'react-redux';
 import TodoListContainer from './../app/modules/components/todoListContainer.js';
 import * as reducers from './../app/modules/reducers/index';
 

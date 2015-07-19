@@ -14,7 +14,7 @@ const action = createAction(ADD, async text => {
     body: JSON.stringify({
       text: text
     })
-  }).then((res) => res.json()).then((json) => json);
+  }).then((res) => res.json());
 
   return result;
 });

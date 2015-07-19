@@ -9,10 +9,14 @@ let state = {
 };
 const api = (router) => {
   return (req, res) => {
+
     const route = router.getRoute(req.url, {method: req.method});
     let item;
 
-    if (route.url === '/add') {
+    if (route.url === '/') {
+      res.send(JSON.stringify(state));
+    }
+    else if (route.url === '/add') {
       item = {
         text: req.body.text,
         id: ++nextId

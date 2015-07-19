@@ -1,9 +1,9 @@
 'use strict';
 
 import React from 'react';
-import create from '../app/modules/redux';
 import { Provider } from 'react-redux';
-import TodoListContainer from './../app/modules/components/todoListContainer.js';
+import create from '../app/modules/redux';
+import TodoListContainer from './../app/modules/components/todoListContainer';
 import * as reducers from './../app/modules/reducers/index';
 
 const initialState = window.__data;

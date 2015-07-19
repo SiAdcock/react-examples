@@ -3,7 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import add from '../actions/add';
+import { add } from '../actions/index';
 import TodoList from './todoList';
 import TodoListInput from './todoListInput';
 

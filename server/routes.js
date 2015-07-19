@@ -1,7 +1,11 @@
 'use strict';
 
 export default {
-  'view_user': {
+  getTodos: {
+    path: '/',
+    method: 'get'
+  },
+  addTodo: {
     path: '/add',
     method: 'post'
   }

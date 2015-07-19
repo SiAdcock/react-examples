@@ -1,15 +1,18 @@
 'use strict';
 
-import { ADD } from '../constants/actionTypes.js';
+import { GET, ADD } from '../constants/actionTypes.js';
 import { handleActions } from 'redux-actions';
 
-let addReducer;
 let todosMap = {};
 let initialState = [];
-
-addReducer = (state = initialState, action) => {
+let getReducer = (state = initialState) => {
+  return state;
+};
+let addReducer = (state = initialState, action) => {
   return state.concat(action.payload);
 };
+
+todosMap[GET] = getReducer;
 todosMap[ADD] = addReducer;
 
 export default handleActions(todosMap, []);

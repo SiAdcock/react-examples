@@ -9,6 +9,7 @@ import render from './render';
 import routes from './routes';
 import create from './../app/modules/redux';
 import * as reducers from '../app/modules/reducers/index';
+import { get } from './../app/modules/actions/index';
 
 const app = new Express();
 let router = new Router(routes);
@@ -21,6 +22,7 @@ app.use('/build', Express.static(path.join(process.cwd(), 'build')));
 app.use('/api', api(router));
 app.use((req, res) => {
   const store = create(reducers);
+  store.dispatch(get());
   const html = render(store);
   res.send(html);
 });

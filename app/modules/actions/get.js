@@ -14,7 +14,7 @@ const action = createAction(GET, async () => {
     }
   }).then((res) => res.json());
 
-  console.log('3.');
+  console.log(result);
   return result;
 });
 

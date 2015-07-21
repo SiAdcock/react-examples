@@ -2,7 +2,7 @@
 
 import koa from 'koa';
 import bodyparser from 'koa-bodyparser';
-import route from 'koa-route';
+import koaRouter from 'koa-router';
 import compose from 'koa-compose';
 
 let nextId = 1000;
@@ -12,22 +12,27 @@ let state = {
     text: 'Default Item'
   }]
 };
+
+const router = koaRouter().get('/', function* () {
+    this.body = JSON.stringify(state);
+  })
+  .post('/add', function* () {
+    let text = this.request.body;
+    let item = {
+      text: text,
+      id: ++nextId
+    };
+
+    state.items.push(item);
+    this.body = JSON.stringify(item);
+  }
+);
+
 const app = koa();
 
-app.use(bodyparser());
-app.use(route.get('/api/'), function* () {
-  this.body = JSON.stringify(state);
-});
-app.use(route.post('/add'), function* (req) {
-  let item = {
-    text: req.body.text,
-    id: ++nextId
-  };
-
-  state.items.push(item);
-  this.body = JSON.stringify(item);
-});
+app.use(bodyparser())
+  .use(router.routes());
 
 export default function() {
   return compose(app.middleware);
-};
+}

@@ -34,6 +34,11 @@ app.use(mount('/', function *() {
     this.body = html;
   })
 );
+app.use(function *(next) {
+  console.log(2.4);
+  
+  next();
+});
 app.listen(8080);
 log.info('Web server listening on port 8080');
 

@@ -6,13 +6,7 @@ import { GET } from '../constants/actionTypes.js';
 
 const action = createAction(GET, async () => {
   console.log('2.');
-  const result = await fetch('/api/', {
-    method: 'get',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-  }).then((res) => res.json());
+  const result = await fetch('/api/').then((res) => res.json());
 
   console.log(result);
   return result;

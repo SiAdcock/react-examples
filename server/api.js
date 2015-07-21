@@ -13,10 +13,8 @@ let state = {
   }]
 };
 
-const router = koaRouter().get('/', function* () {
-    this.body = JSON.stringify(state);
-  })
-  .post('/add', function* () {
+const router = koaRouter()
+  .post('/add', function *() {
     let text = this.request.body;
     let item = {
       text: text,
@@ -25,8 +23,11 @@ const router = koaRouter().get('/', function* () {
 
     state.items.push(item);
     this.body = JSON.stringify(item);
-  }
-);
+  })
+  .get('/', function *() {
+    console.log('2.5');
+    this.body = JSON.stringify(state);
+  });
 
 const app = koa();
 

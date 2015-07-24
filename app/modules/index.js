@@ -44,8 +44,8 @@ const HtmlComponent = React.createClass({
 
       <div id="container" dangerouslySetInnerHTML={{__html: markup}}></div>
 
-      {this.includeScripts()}
       <script dangerouslySetInnerHTML={{__html: 'window.__data = ' + state + ';'}}/>
+      {this.includeScripts()}
       </body>
       </html>
     );

@@ -4,11 +4,10 @@ import { GET, ADD } from '../constants/actionTypes.js';
 import { handleActions } from 'redux-actions';
 
 let todosMap = {};
-let initialState = [];
-let getReducer = (state = initialState) => {
-  return state;
+let getReducer = (state, action) => {
+  return action.payload;
 };
-let addReducer = (state = initialState, action) => {
+let addReducer = (state, action) => {
   return state.concat(action.payload);
 };
 

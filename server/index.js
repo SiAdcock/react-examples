@@ -27,18 +27,13 @@ app.use(mount('/build', serve('build')));
 app.use(mount('/api', api()));
 app.use(mount('/', function *() {
     const store = create(reducers);
-    console.log('1.');
-    yield store.dispatch(get());
-    const html = render(store);
-    console.log('4.');
+    let html;
+
+    yield store.dispatch(get(true));
+    html = render(store);
     this.body = html;
   })
 );
-app.use(function *(next) {
-  console.log(2.4);
-  
-  next();
-});
 app.listen(8080);
 log.info('Web server listening on port 8080');
 

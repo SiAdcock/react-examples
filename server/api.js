@@ -7,7 +7,7 @@ import compose from 'koa-compose';
 
 let nextId = 1000;
 let state = {
-  items: [{
+  todos: [{
     id: ++nextId,
     text: 'Default Item'
   }]
@@ -16,17 +16,16 @@ let state = {
 const router = koaRouter()
   .post('/add', function *() {
     let text = this.request.body;
-    let item = {
+    let todo = {
       text: text,
       id: ++nextId
     };
 
-    state.items.push(item);
-    this.body = JSON.stringify(item);
+    state.todos.push(todo);
+    this.body = JSON.stringify(todo);
   })
   .get('/', function *() {
-    console.log('2.5');
-    this.body = JSON.stringify(state);
+    this.body = JSON.stringify(state.todos);
   });
 
 const app = koa();

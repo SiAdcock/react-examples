@@ -4,11 +4,15 @@ import fetch from 'isomorphic-fetch';
 import { createAction } from 'redux-actions';
 import { GET } from '../constants/actionTypes.js';
 
-const action = createAction(GET, async () => {
-  console.log('2.');
-  const result = await fetch('/api/').then((res) => res.json());
+const action = createAction(GET, async (server) => {
+  let url = '/api/';
+  let result;
 
-  console.log(result);
+  if (server) {
+    url = 'http://localhost:8080' + url;
+  }
+  result = await fetch(url).then((res) => res.json());
+
   return result;
 });
 

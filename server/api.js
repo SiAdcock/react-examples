@@ -18,7 +18,7 @@ let state = {
 
 const router = koaRouter()
   .post('/addForm', function *() {
-    let todo = createTodo(this.request.body);
+    let todo = createTodo(this.request.body.text);
 
     state.todos.push(todo);
     this.body = JSON.stringify(todo);
@@ -26,7 +26,7 @@ const router = koaRouter()
     this.status = 302;
   })
   .post('/add', function *() {
-    let todo = createTodo(this.request.body);
+    let todo = createTodo(this.request.body.text);
 
     state.todos.push(todo);
     this.body = JSON.stringify(todo);

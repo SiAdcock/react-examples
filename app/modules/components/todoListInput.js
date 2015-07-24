@@ -12,7 +12,7 @@ const MyComponent = React.createClass({
   },
   render: function() {
     return (
-      <form action="/api/add" method="post">
+      <form action="/api/addForm" method="post">
         <input type="text" name="text" ref="todoField" placeholder="What to do?"/>
         <button type="submit" onClick={this.handleAddTodo}>Add</button>
       </form>

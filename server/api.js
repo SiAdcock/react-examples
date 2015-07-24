@@ -6,20 +6,27 @@ import koaRouter from 'koa-router';
 import compose from 'koa-compose';
 
 let nextId = 1000;
+const createTodo = (text) => {
+  return {
+    text: text,
+    id: ++nextId
+  };
+};
 let state = {
-  todos: [{
-    id: ++nextId,
-    text: 'Default Item'
-  }]
+  todos: [createTodo('Default Item')]
 };
 
 const router = koaRouter()
+  .post('/addForm', function *() {
+    let todo = createTodo(this.request.body);
+
+    state.todos.push(todo);
+    this.body = JSON.stringify(todo);
+    this.redirect('/');
+    this.status = 302;
+  })
   .post('/add', function *() {
-    let body = this.request.body;
-    let todo = {
-      text: body.text,
-      id: ++nextId
-    };
+    let todo = createTodo(this.request.body);
 
     state.todos.push(todo);
     this.body = JSON.stringify(todo);

@@ -15,9 +15,9 @@ let state = {
 
 const router = koaRouter()
   .post('/add', function *() {
-    let text = this.request.body;
+    let body = this.request.body;
     let todo = {
-      text: text,
+      text: body.text,
       id: ++nextId
     };
 

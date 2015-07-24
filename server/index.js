@@ -25,15 +25,14 @@ app.use(function *(next) {
 app.use(favicon('favicon.ico'));
 app.use(mount('/build', serve('build')));
 app.use(mount('/api', api()));
-app.use(mount('/', function *() {
-    const store = create(reducers);
-    let html;
+app.use(function *() {
+  const store = create(reducers);
+  let html;
 
-    yield store.dispatch(get(true));
-    html = render(store);
-    this.body = html;
-  })
-);
+  yield store.dispatch(get(true));
+  html = render(store);
+  this.body = html;
+});
 app.listen(8080);
 log.info('Web server listening on port 8080');
 

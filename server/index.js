@@ -12,6 +12,7 @@ import render from './render';
 import create from './../app/modules/redux';
 import * as reducers from '../app/modules/reducers/index';
 import { get } from './../app/modules/actions/index';
+import appConfig from './../config/app';
 
 let app = koa();
 
@@ -35,7 +36,7 @@ app.use(function *() {
   html = render(store);
   this.body = html;
 });
-app.listen(8080);
-log.info('Web server listening on port 8080');
+app.listen(appConfig.port);
+log.info('Web server listening on port', appConfig.port);
 
 export default app;

@@ -1,5 +1,7 @@
 'use strict';
 
+global.__SERVER__ = true;
+
 import koa from 'koa';
 import serve from 'koa-static';
 import mount from 'koa-mount';
@@ -29,7 +31,7 @@ app.use(function *() {
   const store = create(reducers);
   let html;
 
-  yield store.dispatch(get(true));
+  yield store.dispatch(get());
   html = render(store);
   this.body = html;
 });

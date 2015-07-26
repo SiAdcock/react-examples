@@ -1,5 +1,7 @@
 'use strict';
 
+window.__SERVER__ = false;
+
 import React from 'react';
 import { Provider } from 'react-redux';
 import create from '../app/modules/redux';

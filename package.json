@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "gulp assets",
-    "start": "node ./index",
+    "start": "node --harmony ./index",
     "test": "node ./bin/test"
   },
   "author": "Simon Adcock (@SiAdcock)",

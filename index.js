@@ -3,4 +3,4 @@
 require('babel/register')({
   optional: ['es7.asyncFunctions', 'es7.decorators']
 });
-require('./server');
+require('./lib/server');
